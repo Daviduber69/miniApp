@@ -1,9 +1,9 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import React from "react";
 import {useQuery} from "@tanstack/react-query";
 
 const CustomerInfo: React.FC = () =>{
-
+    const navigate = useNavigate();
     const {id} = useParams<{id: string}>();
 
 
@@ -23,7 +23,10 @@ const CustomerInfo: React.FC = () =>{
     if(error) return <p>{error.message}</p>
 
 
+function handleGoBack(){
 
+    navigate('/customers');
+}
 
     return (
         <>
@@ -32,6 +35,7 @@ const CustomerInfo: React.FC = () =>{
                 {data.personalIdentityNumber}
 
             </h3>
+            <button onClick={handleGoBack}>GO BACK</button>
         </>
     )
 }

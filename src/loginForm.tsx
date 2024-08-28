@@ -6,17 +6,19 @@ const Login: React.FC = () => {
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [successfulLogin, setSuccessfulLogin] = useState<boolean>();
+  //  const [successfulLogin, setSuccessfulLogin] = useState<boolean>();
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [loadingText, setLoadingText] = useState<string>("");
     const navigate = useNavigate();
-    const handleGoBack = (e: React.MouseEvent<HTMLButtonElement>) => {
+
+  /*  const handleGoBack = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setSuccessfulLogin(false);
         setUsername("");
         setPassword("");
     }
+*/
 
     const handleLoginText = () => {
       let dots = 0;
@@ -57,11 +59,11 @@ const Login: React.FC = () => {
                 })
             .then(data => {
                 setTimeout(() => {
-                        setLoading(false);
-                        setSuccessfulLogin(true);
-                        setLoadingText("");
-                        navigate('/customers');
-                        console.log("Login successful:", data);
+                    setLoading(false);
+                    // setSuccessfulLogin(true);
+                    setLoadingText("");
+                    navigate('/customers');
+                    console.log("Login successful:", data);
                     },2000
                 );
             })
@@ -69,7 +71,7 @@ const Login: React.FC = () => {
          .catch (error => {
              setError("There was an error, sir.");
              setLoading(false);
-             setSuccessfulLogin(false);
+            // setSuccessfulLogin(false);
              console.error("Login error:", error);
 
          });
@@ -78,65 +80,30 @@ const Login: React.FC = () => {
 
 
     return (
-
         <form className="login" onSubmit={handleLogin}>
-            {successfulLogin && (
-
-                <div className="loginScreen">
-
-                   <h1 style={{color: 'green'}}> DU LOGGADE IN! </h1>
-                </div>
-
-            )}
-            {loading && (
-                <h3 style={{color: 'green'}} >{loadingText}</h3>
-            )}
-            <br/>
-
-            {!successfulLogin && (
+            {loading && <h3 style={{ color: 'green' }}>{loadingText}</h3>}
+            {!loading && (
                 <>
-
                     <label>Username: </label>
                     <input
                         type="text"
                         value={username}
-                        onChange={(e) => {
-                            setUsername(e.target.value);
-                        }}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
-
-                    <br/>
+                    <br />
                     <label>Password: </label>
                     <input
                         type="password"
                         value={password}
-                        onChange={(e) => {
-                            setPassword(e.target.value);
-                        }}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
-                    <br/>
-                    <button type="submit">
-                        Log in
-                    </button>
-                    <br/>
-                    {!successfulLogin && (
-                        <>{error}</>
-                    )}
-
-
-                    <br/>
+                    <br />
+                    <button type="submit">Log in</button>
+                    <br />
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
                 </>
             )}
-
-            {successfulLogin && (
-
-                <button type="submit" onClick={handleGoBack}> GO BACK</button>
-
-            )}
-
-
         </form>
-
     );
 };
 

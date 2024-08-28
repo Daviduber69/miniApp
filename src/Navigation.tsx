@@ -5,15 +5,16 @@ import { Link} from "react-router-dom";
 //import Login from "./loginForm.tsx";
 
 
-export default function Nav(){
-    return(
+export default function Nav() {
+    //<li><Link to="/loginForm.tsx">Login Page</Link></li>
+    return (
 
-            <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/loginForm.tsx">Login Page</Link></li>
-                </ul>
-            </nav>
+        <nav>
+            <ul>
+                <li><Link to="/">Home</Link></li>
+
+            </ul>
+        </nav>
 
     )
 }
